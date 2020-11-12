@@ -9,17 +9,25 @@ class Graph:
     def __init__(self):
         self.vertices = {}
 
+
     def add_vertex(self, vertex_id):
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex_id] = set()
+
+
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        for v1, v2 in self.edges:
+            self.edges[v1].append(0)
+            self.edges[v2].append(0)
+        v1.append([0] * len(self.edges + 1))
+        v2.append([0] * len(self.edges + 1))
+
 
     def get_neighbors(self, vertex_id):
         """
