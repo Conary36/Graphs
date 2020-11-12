@@ -22,11 +22,11 @@ class Graph:
         """
         Add a directed edge to the graph.
         """
-        for v1, v2 in self.edges:
-            self.edges[v1].append(0)
-            self.edges[v2].append(0)
-        v1.append([0] * len(self.edges + 1))
-        v2.append([0] * len(self.edges + 1))
+        if v1 in self.vertices and v2 in self.vertices:
+            self.vertices[v1].add(v2)
+            # If not, raise an error
+        else:
+            raise IndexError('nonexistent vertex')
 
 
     def get_neighbors(self, vertex_id):
