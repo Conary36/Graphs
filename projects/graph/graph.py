@@ -2,10 +2,12 @@
 Simple graph implementation
 """
 from util import Stack, Queue  # These may come in handy
+from collections import deque
+
 
 class Graph:
-
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
+
     def __init__(self):
         self.vertices = {}
 
@@ -15,8 +17,6 @@ class Graph:
         Add a vertex to the graph.
         """
         self.vertices[vertex_id] = set()
-
-
 
     def add_edge(self, v1, v2):
         """
@@ -28,19 +28,28 @@ class Graph:
         else:
             raise IndexError('nonexistent vertex')
 
-
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        visited = set()
+        queue = deque()
+        queue.append(starting_vertex)
+        while len(queue) > 0:
+            curr_node = queue.popleft()
+            if curr_node not in visited:
+                visited.add(curr_node)
+                print(curr_node)
+                for neighbor in self.vertices[curr_node]:
+                    queue.append(neighbor)
+
 
     def dft(self, starting_vertex):
         """
@@ -83,6 +92,7 @@ class Graph:
         This should be done using recursion.
         """
         pass  # TODO
+
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
