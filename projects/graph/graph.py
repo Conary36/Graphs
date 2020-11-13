@@ -40,15 +40,15 @@ class Graph:
         beginning from starting_vertex.
         """
         visited = set()
-        queue = deque()
-        queue.append(starting_vertex)
-        while len(queue) > 0:
-            curr_node = queue.popleft()
+        queue = Queue()
+        queue.enqueue(starting_vertex)
+        while queue.size() > 0:
+            curr_node = queue.dequeue()
             if curr_node not in visited:
                 visited.add(curr_node)
                 print(curr_node)
-                for neighbor in self.vertices[curr_node]:
-                    queue.append(neighbor)
+                for neighbor in self.get_neighbors(curr_node):
+                    queue.enqueue(neighbor)
 
 
     def dft(self, starting_vertex):
