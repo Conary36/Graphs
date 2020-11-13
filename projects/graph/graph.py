@@ -83,8 +83,19 @@ class Graph:
         Return a list containing the shortest path from
         starting_vertex to destination_vertex in
         breath-first order.
+
+        Enqueue PATH"[]" to starting node, instead of just starting node
         """
-        pass  # TODO
+        queue = Queue()
+        visited = {}
+        # path to starting vertex is enqueue
+        queue.enqueue([starting_vertex])
+        # loop while que is not empty
+        while queue.size() > 0:
+            #
+            current_path = queue.dequeue()
+            # current node is always last in that path
+            current_node = current_path[-1]
 
     def dfs(self, starting_vertex, destination_vertex):
         """
