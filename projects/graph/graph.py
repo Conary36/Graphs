@@ -11,7 +11,6 @@ class Graph:
     def __init__(self):
         self.vertices = {}
 
-
     def add_vertex(self, vertex_id):
         """
         Add a vertex to the graph.
@@ -47,16 +46,28 @@ class Graph:
             if curr_node not in visited:
                 visited.add(curr_node)
                 print(curr_node)
+                # find the neighbors
                 for neighbor in self.get_neighbors(curr_node):
+                    # iterate over neighbors and add to call queue
                     queue.enqueue(neighbor)
-
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        visited = set()
+        stack = Stack()
+        stack.push(starting_vertex)
+        while stack.size() > 0:
+            curr_node = stack.pop()
+            if curr_node not in visited:
+                visited.add(curr_node)
+                print(curr_node)
+                # find the neighbors
+                for neighbor in self.get_neighbors(curr_node):
+                    # iterate over neighbors and add to call queue
+                    stack.push(neighbor)
 
     def dft_recursive(self, starting_vertex):
         """
