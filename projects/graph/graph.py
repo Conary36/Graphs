@@ -2,7 +2,6 @@
 Simple graph implementation
 """
 from util import Stack, Queue  # These may come in handy
-from collections import deque
 
 
 class Graph:
@@ -69,14 +68,26 @@ class Graph:
                     # iterate over neighbors and add to call queue
                     stack.push(neighbor)
 
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, vertex, visited=set()):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
+
+        Need a base case
+        Needs to call itself
         """
-        pass  # TODO
+        if vertex not in visited:
+            print(vertex)
+            visited.add(vertex)
+
+            neighbors = self.get_neighbors(vertex)
+            if len(neighbors) == 0:
+                return
+            else:
+                for neighbor in neighbors:
+                    self.dft_recursive(neighbor, visited)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -87,23 +98,71 @@ class Graph:
         Enqueue PATH"[]" to starting node, instead of just starting node
         """
         queue = Queue()
-        visited = {}
+        visited = set()
         # path to starting vertex is enqueue
         queue.enqueue([starting_vertex])
         # loop while que is not empty
         while queue.size() > 0:
-            #
+            # dequeue our current path
             current_path = queue.dequeue()
             # current node is always last in that path
             current_node = current_path[-1]
+            # check if we have found our target node
+            if current_node == destination_vertex:
+                # then we are done! return
+                return current_path
+            # check if we've yet visited
+            if current_node not in visited:
+                ## if not, we go to the node
+                ### mark as visited == add to visited set
+                visited.add(current_node)
+                ### get the neighbors
+                neighbors = self.get_neighbors(current_node)
+                ### iterate over the neighbors, enqueue the path to them
+                for neighbor in neighbors:
+                    # create copy of current path and add to new path to node
+                    # new_path = list(current_path)
+                    # new_path.append(neighbor)
+                    # queue.append(new_path)
+                    path_copy = [neighbor] + current_path
+                    # enqueue that copy
+                    queue.enqueue(path_copy)
 
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
+
+        Will not be the shortest path
         """
-        pass  # TODO
+        stack = Stack()
+        visited = set()
+        # path to starting vertex is enqueue
+        stack.push([starting_vertex])
+        # loop while que is not empty
+        while stack.size() > 0:
+            # dequeue our current path
+            current_path = stack.pop()
+            # current node is always last in that path
+            current_node = current_path[-1]
+            # check if we have found our target node
+            if current_node == destination_vertex:
+                # then we are done! return
+                return current_path
+            # check if we've yet visited
+            if current_node not in visited:
+                ## if not, we go to the node
+                ### mark as visited == add to visited set
+                visited.add(current_node)
+                ### get the neighbors
+                neighbors = self.get_neighbors(current_node)
+                ### iterate over the neighbors, enqueue the path to them
+                for neighbor in neighbors:
+                    # create copy of current path and add to new path to node
+                    path_copy = [neighbor] + current_path
+                    # enqueue that copy
+                    stack.push(path_copy)
 
     def dfs_recursive(self, starting_vertex, destination_vertex):
         """
