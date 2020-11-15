@@ -124,7 +124,7 @@ class Graph:
                     # new_path = list(current_path)
                     # new_path.append(neighbor)
                     # queue.append(new_path)
-                    path_copy = [neighbor] + current_path
+                    path_copy = current_path + [neighbor]
                     # enqueue that copy
                     queue.enqueue(path_copy)
 
@@ -160,7 +160,7 @@ class Graph:
                 ### iterate over the neighbors, enqueue the path to them
                 for neighbor in neighbors:
                     # create copy of current path and add to new path to node
-                    path_copy = [neighbor] + current_path
+                    path_copy = current_path + [neighbor]
                     # enqueue that copy
                     stack.push(path_copy)
 
