@@ -51,7 +51,7 @@ If all paths have been explored, you're done!
 
 * __1__: Tests do not pass
 * __2__: Tests pass with `len(traversal_path) <= 2000`
-* __3__: Tests pass with `len(traversal_path) < 960`
+* __3__: Tests pass with `len(traversal_path) < 960`~~~~
 
 ## Stretch Problems
 
